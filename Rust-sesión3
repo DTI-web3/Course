@@ -1,0 +1,37 @@
+
+Propiedades de Ownership y Borrowing en Rust
+
+Example:
+
+struct Rectangulo {
+    ancho: u32,
+    alto: u32
+}
+fn area(rectangulo:&Rectangulo) -> u32 {
+    rectangulo.ancho * rectangulo.alto
+}
+fn main() {
+    //ownership
+    /*
+    1. Cada valor en Rust tiene su propio Ownership.
+    2. Si un ownership sale del alcance, el valor se descartará
+    3. Solo puede existir un ownership a la vez.
+     */
+    let rectangulo = Rectangulo {ancho: 10, alto:20};
+        //Los argumentos son pasados mediante prestamos -> default
+        //Los argumentos sean pasados por referencias
+    let resultado = area(&rectangulo);
+
+    //los objetos que se almacenan en el heap (pueden modificar su tamaño)
+    //let nuevo_rectangulo = rectangulo; // movimiento de ownership
+
+    //ya poseen un tamaño definido, no es necesaria saber a quien pertenecen
+    //let x: i32 = 10; //Stack
+    // let y: i32 = x; 
+
+    //println!("{}",x);
+    //println!("{}",y);
+
+    println!("El área del rectangulo es {}", resultado);
+    println!("el ancho es {} y el alto es {}", rectangulo.ancho, rectangulo.alto);
+}
